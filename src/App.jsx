@@ -1,17 +1,13 @@
 import SpotifyWebApi from 'spotify-web-api-node';
 import './App.css';
-import { Stack, Button, Box } from '@mui/material';
+import { Box } from '@mui/material';
+import Login from './pages/Login.jsx';
 
-function App({spotifyApi}) {
-	console.log(spotifyApi)
+function App({ spotifyApi }) {
 	return (
 		<Box className="App">
 			<h1>Techover Self Made - Spotify</h1>
-			<Stack spacing={2} direction="row">
-				<Button variant="text">Text</Button>
-				<Button variant="contained">Contained</Button>
-				<Button variant="outlined">Outlined</Button>
-			</Stack>
+			<Login/>
 		</Box>
 	);
 }

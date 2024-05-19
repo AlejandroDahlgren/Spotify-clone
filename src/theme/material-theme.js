@@ -9,7 +9,7 @@ export const themeOptions = createTheme({
             constrastText: '#ffffff',
         },
         background: {
-            default: '#ffffff',
+            default: '#000000',
             secondary: '#121212',
         },
         text: {
