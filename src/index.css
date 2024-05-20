@@ -42,3 +42,7 @@ body {
     background-color: #ffffff60;
 }
 /* ===== Scrollbar CSS end ===== */
+
+a {
+    padding: 10px 80px;
+}
