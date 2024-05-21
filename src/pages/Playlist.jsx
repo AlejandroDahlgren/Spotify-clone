@@ -1,6 +1,7 @@
 import { Avatar, Box, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { useParams, useCallback } from 'react-router-dom';
+import { useParams} from 'react-router-dom';
+import { useCallback } from 'react';
 
 const Playlist = ({ spotifyApi, token }) => {
 	const [playlistinfo, setplaylistinfo] = useState();
