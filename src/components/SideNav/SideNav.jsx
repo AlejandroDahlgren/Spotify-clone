@@ -20,6 +20,16 @@ const SideNav = ({ spotifyApi, token }) => {
 		getPlaylists();
 	}, [spotifyApi, token]);
 
+	const renderPlaylist = () => {
+		if (loading) {
+			return [1,2,3,4,5,6,7,8,9,10].map((element, i)=> <NavPlaylist key={i} loading={loading} />)
+		}
+		console.log({playlists});
+		return playlists.map((playlists, i) => (
+		<NavPlaylist name={playlists.name} id={playlists.id} loading={loading} key={i} />
+		));
+	}
+
 	return (
 		<Box
 			sx={{
@@ -37,9 +47,7 @@ const SideNav = ({ spotifyApi, token }) => {
 			<Box p={3} py={1}>
 				<Divider sx={{ backgroundColor: '#ffffff40' }} />
 			</Box>
-			<Box sx={{ overflowY: 'auto', flex: 1 }}>
-				<NavPlaylist loading={false} name='pop' id='123'/>
-			</Box>
+			<Box sx={{ overflowY: 'auto', flex: 1 }}>{renderPlaylist()}</Box>
 		</Box>
 	);
 };
