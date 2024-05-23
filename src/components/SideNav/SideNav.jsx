@@ -3,6 +3,7 @@ import { Box, Divider } from '@mui/material';
 import NavItem from '../NavItem/NavItem';
 import HomeIcon from '@mui/icons-material/Home';
 import NavPlaylist from '../NavPlaylist/NavPlaylist';
+import { Margin } from '@mui/icons-material';
 
 const SideNav = ({ spotifyApi, token }) => {
 	const [playlists, setPlaylists] = useState([]);
@@ -13,8 +14,8 @@ const SideNav = ({ spotifyApi, token }) => {
 			if (!spotifyApi) return;
 
 			const data = await spotifyApi.getUserPlaylists();
-			setPlaylists(data.body.items)
-			setLoading(false)
+			setPlaylists(data.body.items);
+			setLoading(false);
 		}
 
 		getPlaylists();
@@ -22,13 +23,13 @@ const SideNav = ({ spotifyApi, token }) => {
 
 	const renderPlaylist = () => {
 		if (loading) {
-			return [1,2,3,4,5,6,7,8,9,10].map((element, i)=> <NavPlaylist key={i} loading={loading} />)
+			return [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((element, i) => <NavPlaylist key={i} loading={loading} />);
 		}
-		console.log({playlists});
+		console.log({ playlists });
 		return playlists.map((playlists, i) => (
-		<NavPlaylist name={playlists.name} id={playlists.id} loading={loading} key={i} />
+			<NavPlaylist name={playlists.name} id={playlists.id} loading={loading} key={i} />
 		));
-	}
+	};
 
 	return (
 		<Box
@@ -43,7 +44,7 @@ const SideNav = ({ spotifyApi, token }) => {
 			<Box p={3}>
 				<img src="/Spotify_Logo.png" alt="Spotify logo" width={'75%'} />
 			</Box>
-			<NavItem name="Home" Icon={HomeIcon} target="/" />
+			<NavItem name="Home" Icon={HomeIcon} target="/" active />
 			<Box p={3} py={1}>
 				<Divider sx={{ backgroundColor: '#ffffff40' }} />
 			</Box>

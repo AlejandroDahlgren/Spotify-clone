@@ -6,7 +6,7 @@ const SongRow = ({ images, title, artist, album, duration, i, loading, position,
 
     const onRowClick = async () => {
         const song = { context_uri: contextUri, offset: {position: position}, position_ms: 0 }
-        await spotifyApi.play()
+        await spotifyApi.play(song)
     }
 
 	return (
