@@ -39,6 +39,7 @@ const Player = ({ spotifyApi, token }) => {
 				if (!state || !state.track_window?.current_track) {
 					return;
 				}
+				console.log(state);
 				const duration = state.track_window.current_track.duration_ms / 1000;
 				const progress = state.position / 1000;
 				setDuration(duration);
