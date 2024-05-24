@@ -8,15 +8,13 @@ import Playlist from '../../pages/Playlist';
 import Player from '../Player/Player.jsx';
 
 const Dashboard = ({ spotifyApi }) => {
-	const token = useState(getAccessTokenFromStorage());
+	const [token, setToken] = useState(getAccessTokenFromStorage());
 
 	useEffect(() => {
 		const onMount = async () => {
 			await spotifyApi.setAccessToken(token);
 		};
-		if (token) {
-			onMount();
-		}
+		if (token) onMount();
 	}, []);
 	return (
 		<Box sx={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
@@ -28,7 +26,7 @@ const Dashboard = ({ spotifyApi }) => {
 					<Route path="/" element={<Home />} />
 				</Routes>
 			</Box>
-			{token && <Player spotifyApi={spotifyApi}/>}
+			{token && <Player spotifyApi={spotifyApi} token={token}/>}
 		</Box>
 	);
 };
