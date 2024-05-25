@@ -38,7 +38,6 @@ const PlayerControls = ({ is_paused, duration, progress, player }) => {
 					size="large"
 					sx={{ color: 'text.primary' }}
 					onClick={() => {
-						setCurrentProgress(0);
 						player.togglePlay();
 					}}
 				>
@@ -56,18 +55,17 @@ const PlayerControls = ({ is_paused, duration, progress, player }) => {
 				</IconButton>
 			</Stack>
 			<Stack spacing={2} direction={'row'} justifyContent={'center'} alignItems={'center'} sx={{ width: '75%' }}>
-				<Typography sx={{ color: 'text.secondary', fontSize: 12 }}>{formatTime(progress)}</Typography>
+				<Typography sx={{ color: 'text.secondary', fontSize: 12 }}>{formatTime(currentProgress)}</Typography>
 				<Slider
 					max={duration}
 					value={currentProgress}
 					min={0}
 					size="medium"
-					onChange={(event, value) => {
-						console.log('Changed' ,value);
+					onChange={(_, value) => {
 						setCurrentProgress(value)
 					}}
-					onChangeCommitted={(event, value) => {
-						player.seek(60 * 1000);
+					onChangeCommitted={(e, value) => {
+						player.seek(value * 1000);
 					}}
 				/>
 				<Typography sx={{ color: 'text.secondary', fontSize: 12 }}>{formatTime(duration)}</Typography>

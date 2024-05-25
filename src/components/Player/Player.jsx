@@ -39,7 +39,6 @@ const Player = ({ spotifyApi, token }) => {
 				if (!state || !state.track_window?.current_track) {
 					return;
 				}
-				console.log(state);
 				const duration = state.track_window.current_track.duration_ms / 1000;
 				const progress = state.position / 1000;
 				setDuration(duration);
@@ -65,16 +64,6 @@ const Player = ({ spotifyApi, token }) => {
 			localPlayer.disconnect();
 		};
 	}, [localPlayer]);
-
-	// useEffect(() => {
-	// 	const transferMyPlayback = async () => {
-	// 		if (device) {
-	// 			await spotifyApi.transferMyPlayback([device], true);
-	// 		}
-	// 	};
-
-	// 	transferMyPlayback();
-	// }, [device, spotifyApi]);
 
 	return (
 		<Box>
@@ -122,13 +111,13 @@ const Player = ({ spotifyApi, token }) => {
 					md={4}
 					item
 				>
-					{active ?
+					{active ? (
 					<PlayerControls
 						progress={progress}
 						is_paused={is_paused}
 						duration={duration}
 						player={localPlayer}
-					/> : <Box> Please transfer Playback </Box> } 
+					/>) : (<Box> Please transfer Playback </Box> )} 
 				</Grid>
 				<Grid xs={6} md={4} item sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
 					<PlayerVolume player= {localPlayer} />
