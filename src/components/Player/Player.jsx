@@ -1,7 +1,8 @@
-import { Box, Grid, Typography, Avatar, Slider } from '@mui/material';
+import { Box, Grid, Typography, Avatar} from '@mui/material';
 import { useEffect, useState } from 'react';
 import PlayerControls from '../PlayerControls/PlayerControls';
 import PlayerVolume from '../PlayerVolume/PlayerVolume';
+import PlayerOverlay from '../PlayerOverlay/PlayerOverlay';
 
 const Player = ({ spotifyApi, token }) => {
 	const [localPlayer, setPlayer] = useState();
@@ -11,6 +12,7 @@ const Player = ({ spotifyApi, token }) => {
 	const [duration, setDuration] = useState();
 	const [progress, setProgress] = useState();
 	const [active, setActive] = useState();
+	const [playerOverlayIsOpen, setPlayerOverlayIsOpen] = useState(false);
 
 	useEffect(() => {
 		const script = document.createElement('script');
@@ -46,9 +48,9 @@ const Player = ({ spotifyApi, token }) => {
 				setIsPaused(state.paused);
 				setCurrentTrack(state.track_window.current_track);
 
-					player.getCurrentState().then((state) => {
-						!state ? setActive(false) : setActive(true);
-					})
+				player.getCurrentState().then((state) => {
+					!state ? setActive(false) : setActive(true);
+				});
 			});
 			player.connect();
 		};
@@ -68,6 +70,9 @@ const Player = ({ spotifyApi, token }) => {
 	return (
 		<Box>
 			<Grid
+				onClick={() => {
+					setPlayerOverlayIsOpen((open) => !open);
+				}}
 				container
 				px={3}
 				sx={{
@@ -112,17 +117,30 @@ const Player = ({ spotifyApi, token }) => {
 					item
 				>
 					{active ? (
-					<PlayerControls
-						progress={progress}
-						is_paused={is_paused}
-						duration={duration}
-						player={localPlayer}
-					/>) : (<Box> Please transfer Playback </Box> )} 
+						<PlayerControls
+							progress={progress}
+							is_paused={is_paused}
+							duration={duration}
+							player={localPlayer}
+						/>
+					) : (
+						<Box> Please transfer Playback </Box>
+					)}
 				</Grid>
-				<Grid xs={6} md={4} item sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
-					<PlayerVolume player= {localPlayer} />
+				<Grid xs={6} md={4} item sx={{ display: {xs: 'none', md: 'flex' }, alignItems: 'center', justifyContent: 'flex-end' }}>
+					<PlayerVolume player={localPlayer} />
 				</Grid>
 			</Grid>
+			<PlayerOverlay
+				playerOverlayIsOpen={playerOverlayIsOpen}
+				closeOverlay={() => setPlayerOverlayIsOpen(false)}
+				progress={progress}
+				is_paused={is_paused}
+				duration={duration}
+				player={localPlayer}
+				current_track={current_track}
+				active={active}
+			/>
 		</Box>
 	);
 };
