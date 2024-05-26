@@ -23,7 +23,8 @@ const Library = ({token, spotifyApi}) => {
         if(loading) {
             return [1,2,3,4,5,6,7,8].map((_, i) => <PlaylistItem loading={loading} key={i}/>)
         }
-        return albumList.map((playlists, i) => <PlaylistItem key={i} loading={loading} {...playlists} />)
+        return albumList.map((playlists, i) => (
+			<PlaylistItem   {...playlists} loading={loading} key={i}/>))
 
     } 
 
