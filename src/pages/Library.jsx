@@ -13,7 +13,6 @@ const Library = ({token, spotifyApi}) => {
 			const data = await spotifyApi.getUserPlaylists();
 			setAlbumList(data.body.items);
 			setLoading(false);
-            console.log(data.body.items)
 		}
 
 		getPlaylists();
