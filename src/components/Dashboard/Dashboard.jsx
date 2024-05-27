@@ -39,7 +39,7 @@ const Dashboard = ({ spotifyApi }) => {
 					</>
 				)}
 			</Box>
-			{token && !loading && <Player spotifyApi={spotifyApi} />}
+			{token && !loading && <Player spotifyApi={spotifyApi}  token={token}/>}
 			<MobileNav />
 		</Box>
 	);
